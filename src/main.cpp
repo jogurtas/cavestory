@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     SDL_Event windowEvent;
 
-    imageSurface = IMG_Load("../assets/logo.png");
+    imageSurface = IMG_Load("../../assets/logo.png");
 
     if (nullptr == imageSurface) {
         std::cout << "SDL could not load image! SDL Error: " << SDL_GetError() << std::endl;
