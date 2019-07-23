@@ -1,0 +1,13 @@
+{
+  "args": [
+    "${workspaceRoot}"
+  ],
+  "ExpandedNodes": [
+    "",
+    "\\assets",
+    "\\assets\\sprites",
+    "\\src"
+  ],
+  "SelectedNode": "\\src\\Globals.h",
+  "PreviewInSolutionExplorer": false
+}
