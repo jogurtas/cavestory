@@ -12,9 +12,7 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &filePath,
         _timeToUpdate(timeToUpdate),
         _visible(true),
         _currentAnimationOnce(false),
-        _currentAnimation("") {
-
-}
+        _currentAnimation("") {}
 
 void AnimatedSprite::playAnimation(std::string animation, bool once) {
     _currentAnimationOnce = once;
@@ -56,11 +54,6 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y) {
     }
 }
 
-void AnimatedSprite::setupAnimations() {
-    addAnimation(3, 0, 0, "RunLeft", 16, 16, Vector2(0, 0));
-	addAnimation(3, 0, 16, "RunRight", 16, 16, Vector2::zero());
-}
-
 void AnimatedSprite::addAnimation(int frames, int x, int y, std::string name, int width, int height, Vector2 offset) {
     std::vector<SDL_Rect> rects;
 
@@ -85,8 +78,4 @@ void AnimatedSprite::stopAnimation() {
 
 void AnimatedSprite::setVisible(bool visible) {
     _visible = visible;
-}
-
-void AnimatedSprite::animationDone(std::string currentAnimation) {
-
 }

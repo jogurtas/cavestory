@@ -1,6 +1,7 @@
 #pragma once
 
-#include "AnimatedSprite.h"
+#include "Player.h"
+#include "Level.h"
 
 class Graphics;
 
@@ -12,7 +13,8 @@ public:
     ~Game();
 
 private:
-    AnimatedSprite player;
+    Player player;
+	Level level;
 
     void gameLoop();
 

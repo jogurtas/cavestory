@@ -17,12 +17,12 @@ public:
 
     virtual void update();
 
-    void draw(Graphics &graphics, int x, int w);
+    void draw(Graphics &graphics, int xPos, int yPos);
 
 protected:
     SDL_Rect srcRect;
     SDL_Texture *spriteSheet;
+	float x;
+	float y;
 private:
-    float x;
-    float y;
 };

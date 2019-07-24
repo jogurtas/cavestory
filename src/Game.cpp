@@ -23,9 +23,8 @@ void Game::gameLoop() {
 	Input input;
 	SDL_Event event;
 
-	player = AnimatedSprite(gfx, "../assets/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
-	player.setupAnimations();
-	player.playAnimation("RunLeft");
+	player = Player(gfx, 100, 100);
+	level = Level("map 1", Vector2(100, 100), gfx);
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
 	while (true) {
@@ -48,6 +47,16 @@ void Game::gameLoop() {
 		if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE)) {
 			return;
 		}
+		else if (input.isKeyHeld(SDL_SCANCODE_LEFT)) {
+			player.moveLeft();
+		}
+		else if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) {
+			player.moveRight();
+		}
+		else {
+			player.stopMoving();
+		}
+
 
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		const int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
@@ -60,10 +69,12 @@ void Game::gameLoop() {
 
 void Game::draw(Graphics& graphics) {
 	graphics.clear();
-	player.draw(graphics, 100, 100);
+	level.draw(graphics);
+	player.draw(graphics);
 	graphics.flip();
 }
 
 void Game::update(float deltaTime) {
 	player.update(deltaTime);
+	level.update(deltaTime);
 }
