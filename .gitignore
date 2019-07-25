@@ -1,4 +1,6 @@
 ### .gitignore ###
 
 .idea/**/workspace.xml
-build/
+build/*
+.vs/
+!.vs/launch.vs.json
