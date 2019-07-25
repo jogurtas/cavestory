@@ -2,5 +2,8 @@
 
 .idea/**/workspace.xml
 build/*
-.vs/
-!.vs/launch.vs.json
+
+.vs/cavestory/*
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
