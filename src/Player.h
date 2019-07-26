@@ -9,7 +9,7 @@ class Player : public AnimatedSprite {
 public:
 	Player();
 
-	Player(Graphics &gfx, float x, float y);
+	Player(Graphics &gfx, Vector2 _spawnPoint);
 
 	void draw(Graphics &gfx);
 
@@ -27,8 +27,16 @@ public:
 
 	/// Stops moving the player
 	void stopMoving();
+
+	const float getX() const;
+
+	const float getY() const;
+
+	/// Handles collision with ALL tiles the player is colliding with
+	void handleTileCollision(std::vector<Rectangle> &others);
+
 private:
 	float _dx, _dy;
-
 	Direction _facing;
+	bool _grounded;
 };

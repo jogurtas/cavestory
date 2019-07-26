@@ -7,7 +7,6 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
-# add_executable(cavestory main.cpp Graphics.cpp Graphics.h Game.cpp Game.h Input.cpp Input.h Sprite.cpp Sprite.h Globals.h AnimatedSprite.cpp AnimatedSprite.h Player.cpp Player.h Level.cpp Level.h)
 add_executable(cavestory 
 				main.cpp 
 				Graphics.cpp 

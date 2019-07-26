@@ -4,6 +4,7 @@
 #include <vector>
 #include "Globals.h"
 #include "Tile.h"
+#include "Rectangle.h"
 
 class Graphics;
 struct SDL_Texture;
@@ -18,9 +19,13 @@ public:
 	
 	~Level();
 
-	void update(int deltaTime);
+	void update(float deltaTime);
 
 	void draw(Graphics &gfx);
+
+	std::vector<Rectangle> checkTileCollisions(const Rectangle &other);
+
+	const Vector2 getPlayerSpawnPoint() const;
 
 private:
 	std::string _mapName;
@@ -31,6 +36,7 @@ private:
 
 	std::vector<Tile> _tileList;
 	std::vector<Tileset> _tilesets;
+	std::vector<Rectangle> _collisionRects;
 
 	void loadMap(std::string mapName, Graphics &gfx);
 };
