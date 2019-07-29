@@ -57,6 +57,10 @@ void Game::gameLoop() {
 			player.stopMoving();
 		}
 
+		if (input.wasKeyPressed(SDL_SCANCODE_SPACE)) {
+			player.jump();
+		}
+
 
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		const int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
@@ -83,5 +87,10 @@ void Game::update(float deltaTime) {
 	if ((others = level.checkTileCollisions(player.getBoundingBox())).size() > 0) {
 		// Player collided with at least one tile. Handle it.
 		player.handleTileCollision(others);
+	}
+
+	std::vector<Slope> otherSlopes;
+	if ((otherSlopes = level.checkSlopeCollisions(player.getBoundingBox())).size() > 0) {
+		player.handleSlopeCollision(otherSlopes);
 	}
 }

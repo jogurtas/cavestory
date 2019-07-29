@@ -5,6 +5,7 @@
 
 Graphics::Graphics() {
     SDL_CreateWindowAndRenderer(globals::SCREEN_WIDTH, globals::SCREEN_HEIGHT, 0, &window, &renderer);
+	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
     SDL_SetWindowTitle(window, "Cave story");
 }
 

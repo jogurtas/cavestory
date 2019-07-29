@@ -35,8 +35,7 @@ void AnimatedSprite::update(float deltaTime) {
             if (_currentAnimationOnce){
                 setVisible(false);
             }
-            _frameIndex = 0;
-            animationDone(_currentAnimation);
+			stopAnimation();
         }
     }
 }

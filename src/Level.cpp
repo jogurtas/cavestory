@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "Graphics.h"
 #include "Globals.h"
+#include "Utils.h"
 
 using namespace tinyxml2;
 
@@ -35,6 +36,17 @@ std::vector<Rectangle> Level::checkTileCollisions(const Rectangle &other) {
 	for (Uint32 i = 0; i < _collisionRects.size(); i++) {
 		if (_collisionRects.at(i).collidesWidth(other)) {
 			others.push_back(_collisionRects.at(i));
+		}
+	}
+
+	return others;
+}
+
+std::vector<Slope> Level::checkSlopeCollisions(const Rectangle &other) {
+	std::vector<Slope> others;
+	for (size_t i = 0; i < _slopes.size(); i++) {
+		if (_slopes.at(i).collidesWith(other)) {
+			others.push_back(_slopes.at(i));
 		}
 	}
 
@@ -206,6 +218,44 @@ void Level::loadMap(std::string mapName, Graphics &gfx) {
 						if (ss.str() == "player") {
 							_spawnPoint = Vector2((int)(std::ceil(x) * globals::SPRITE_SCALE),
 								(int)(std::ceil(y) * globals::SPRITE_SCALE));
+						}
+
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+			else if (ss.str() == "slopes") {
+				XMLElement *pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						std::vector<Vector2> points;
+						Vector2 p1;
+						p1 = Vector2(std::ceil(pObject->FloatAttribute("x")), std::ceil(pObject->FloatAttribute("y")));
+
+						XMLElement *pPolyline = pObject->FirstChildElement("polyline");
+						if (pPolyline != NULL) {
+							std::vector<std::string> pairs;
+							const char *pointString = pPolyline->Attribute("points");
+
+							std::stringstream ss;
+							ss << pointString;
+							Utils::split(ss.str(), pairs, ' ');
+							//Now we have each of the pairs. Loop through the list of pairs
+							//and split them into Vector2s and then store them in our points vector
+							for (int i = 0; i < pairs.size(); i++) {
+								std::vector<std::string> ps;
+								Utils::split(pairs.at(i), ps, ',');
+								points.push_back(Vector2(std::stoi(ps.at(0)), std::stoi(ps.at(1))));
+							}
+						}
+
+						for (int i = 0; i < points.size(); i += 2) {
+							this->_slopes.push_back(Slope(
+								Vector2((p1.x + points.at(i < 2 ? i : i - 1).x) * globals::SPRITE_SCALE,
+								(p1.y + points.at(i < 2 ? i : i - 1).y) * globals::SPRITE_SCALE),
+								Vector2((p1.x + points.at(i < 2 ? i + 1 : i).x) * globals::SPRITE_SCALE,
+								(p1.y + points.at(i < 2 ? i + 1 : i).y) * globals::SPRITE_SCALE)
+							));
 						}
 
 						pObject = pObject->NextSiblingElement("object");

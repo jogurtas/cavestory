@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "Tile.h"
 #include "Rectangle.h"
+#include "Slope.h"
 
 class Graphics;
 struct SDL_Texture;
@@ -25,6 +26,8 @@ public:
 
 	std::vector<Rectangle> checkTileCollisions(const Rectangle &other);
 
+	std::vector<Slope> checkSlopeCollisions(const Rectangle &other);
+
 	const Vector2 getPlayerSpawnPoint() const;
 
 private:
@@ -37,6 +40,7 @@ private:
 	std::vector<Tile> _tileList;
 	std::vector<Tileset> _tilesets;
 	std::vector<Rectangle> _collisionRects;
+	std::vector<Slope> _slopes;
 
 	void loadMap(std::string mapName, Graphics &gfx);
 };
