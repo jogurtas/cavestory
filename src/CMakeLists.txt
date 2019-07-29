@@ -17,6 +17,7 @@ add_executable(cavestory
 				Player.cpp 
 				Level.cpp
 				Tile.cpp
+				AnimatedTile.cpp
 				tinyxml2.cpp
 				)
 

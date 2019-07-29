@@ -15,7 +15,7 @@ public:
 
 	void draw(Graphics &gfx);
 
-private:
+protected:
 	SDL_Texture *_tileset;
 	Vector2 _size;
 	Vector2 _tilesetPos;
