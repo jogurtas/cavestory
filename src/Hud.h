@@ -12,7 +12,7 @@ public:
 
 	Hud(Graphics &gfx, Player &player);
 
-	void update(int deltaTime);
+	void update(int deltaTime, Player &player);
 
 	void draw(Graphics &gfx);
 

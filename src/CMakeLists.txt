@@ -19,6 +19,7 @@ add_executable(cavestory
 				Tile.cpp
 				AnimatedTile.cpp
 				Hud.cpp
+				Enemy.cpp
 				tinyxml2.cpp
 				)
 

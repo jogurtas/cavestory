@@ -8,6 +8,8 @@
 #include "Graphics.h"
 #include "Globals.h"
 #include "Utils.h"
+#include "Enemy.h"
+#include "Player.h"
 
 using namespace tinyxml2;
 
@@ -21,9 +23,12 @@ Level::Level(std::string mapName, Graphics &gfx) :
 
 Level::~Level() {}
 
-void Level::update(float deltaTime) {
+void Level::update(float deltaTime, Player &player) {
 	for (size_t i = 0; i < _animatedTileList.size(); i++) {
 		_animatedTileList.at(i).update(deltaTime);
+	}
+	for (size_t i = 0; i < _enemies.size(); i++) {
+		_enemies.at(i)->update(deltaTime, player);
 	}
 }
 
@@ -33,6 +38,9 @@ void Level::draw(Graphics &gfx) {
 	}
 	for (size_t i = 0; i < _animatedTileList.size(); i++) {
 		_animatedTileList.at(i).draw(gfx);
+	}
+	for (size_t i = 0; i < _enemies.size(); i++) {
+		_enemies.at(i)->draw(gfx);
 	}
 }
 
@@ -63,6 +71,17 @@ std::vector<Door> Level::checkDoorCollision(const Rectangle &other) {
 	for (size_t i = 0; i < _doorList.size(); i++) {
 		if (_doorList.at(i).collidesWith(other)) {
 			others.push_back(_doorList.at(i));
+		}
+	}
+
+	return others;
+}
+
+std::vector<Enemy *> Level::checkEnemyCollision(const Rectangle &other) {
+	std::vector<Enemy *> others;
+	for (size_t i = 0; i < _enemies.size(); i++) {
+		if (_enemies.at(i)->getBoundingBox().collidesWith(other)) {
+			others.push_back(_enemies.at(i));
 		}
 	}
 
@@ -320,6 +339,25 @@ void Level::loadMap(std::string mapName, Graphics &gfx) {
 					}
 				}
 			}
+			else if (ss.str() == "enemies") {
+				float x, y;
+				XMLElement *pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != nullptr) {
+					while (pObject) {
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						const char *name = pObject->Attribute("name");
+						std::stringstream ss;
+						ss << name;
+						if (ss.str() == "bat") {
+							_enemies.push_back(new Bat(gfx, Vector2(std::floor(x) * globals::SPRITE_SCALE,
+								std::floor(y) * globals::SPRITE_SCALE)));
+						}
+
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
 			else if (ss.str() == "doors") {
 				XMLElement *pObject = pObjectGroup->FirstChildElement("object");
 				if (pObject != nullptr) {
@@ -357,6 +395,7 @@ void Level::loadMap(std::string mapName, Graphics &gfx) {
 					}
 				}
 			}
+
 
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}

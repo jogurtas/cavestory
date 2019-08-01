@@ -94,8 +94,8 @@ void Game::draw(Graphics& graphics) {
 
 void Game::update(float deltaTime) {
 	player.update(deltaTime);
-	level.update(deltaTime);
-	hud.update((int)deltaTime);
+	level.update(deltaTime, player);
+	hud.update((int)deltaTime, player);
 
 	// Check collisions
 	std::vector<Rectangle> others;
@@ -112,5 +112,10 @@ void Game::update(float deltaTime) {
 	std::vector<Door> otherDoors = level.checkDoorCollision(player.getBoundingBox());
 	if (otherDoors.size() > 0) {
 		player.handleDoorCollision(otherDoors, level, _gfx);
+	}
+
+	std::vector<Enemy*> otherEnemies = level.checkEnemyCollision(player.getBoundingBox());
+	if (otherEnemies.size() > 0) {
+		player.handleEnemyCollision(otherEnemies);
 	}
 }

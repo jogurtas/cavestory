@@ -198,3 +198,13 @@ void Player::handleDoorCollision(std::vector<Door> &others, Level &level, Graphi
 		}
 	}
 }
+
+void Player::handleEnemyCollision(std::vector<Enemy *> &others) {
+	for (size_t i = 0; i < others.size(); i++) {
+		others.at(i)->touchPlayer(this);
+	}
+}
+
+void Player::gainHealth(int amount) {
+	_currentHealth += amount;
+}

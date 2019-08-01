@@ -10,6 +10,8 @@
 #include "Door.h"
 
 class Graphics;
+class Enemy;
+class Player;
 struct SDL_Texture;
 struct SDL_Rect;
 struct Tileset;
@@ -22,7 +24,7 @@ public:
 	
 	~Level();
 
-	void update(float deltaTime);
+	void update(float deltaTime, Player &player);
 
 	void draw(Graphics &gfx);
 
@@ -31,6 +33,8 @@ public:
 	std::vector<Slope> checkSlopeCollisions(const Rectangle &other);
 
 	std::vector<Door> checkDoorCollision(const Rectangle &other);
+
+	std::vector<Enemy *> checkEnemyCollision(const Rectangle &other);
 
 	const Vector2 getPlayerSpawnPoint() const;
 
@@ -49,6 +53,7 @@ private:
 	std::vector<AnimatedTileInfo> _animatedTileInfo;
 
 	std::vector<Door> _doorList;
+	std::vector<Enemy *> _enemies;
 
 	void loadMap(std::string mapName, Graphics &gfx);
 

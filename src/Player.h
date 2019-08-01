@@ -5,6 +5,7 @@
 #include "Slope.h"
 #include "Door.h"
 #include "Level.h"
+#include "Enemy.h"
 
 class Grapics;
 
@@ -53,9 +54,13 @@ public:
 
 	void handleDoorCollision(std::vector<Door> &others, Level &level, Graphics &gfx);
 
+	void handleEnemyCollision(std::vector<Enemy*> &others);
+	
 	const inline int getMaxHealth() const { return _maxHealth; }
 
 	const inline int getCurrentHealth() const { return _currentHealth; }
+
+	void gainHealth(int amount);
 
 private:
 	float _dx, _dy;
