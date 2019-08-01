@@ -21,10 +21,22 @@ public:
 
     void draw(Graphics &graphics, int xPos, int yPos);
 
+	void setSourceRectX(int value);
+
+	void setSourceRectY(int value);
+
+	void setSourceRectWidth(int value);
+
+	void setSourceRectHeight(int value);
+
 	const Rectangle getBoundingBox() const;
 
 	/// Determine which side the collision happend
 	const sides::Side getCollisionSide(Rectangle &other) const;
+
+	const inline float getX() const { return x; }
+
+	const inline float getY() const { return y; }
 
 protected:
     SDL_Rect srcRect;

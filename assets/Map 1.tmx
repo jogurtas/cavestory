@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="20" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="40">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="20" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="42">
  <tileset firstgid="1" name="PrtCave" tilewidth="16" tileheight="16" tilecount="80" columns="16">
   <image source="PrtCave.png" width="256" height="80"/>
  </tileset>
@@ -710,6 +710,13 @@
  <objectgroup color="#55ff00" id="8" name="spawn points">
   <object id="33" name="player" x="155.795" y="132.682" width="2.90909" height="2.90909">
    <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="doors">
+  <object id="41" x="146.667" y="47" width="10.6667" height="16.3333">
+   <properties>
+    <property name="destination" value="Map 2"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

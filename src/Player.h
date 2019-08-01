@@ -3,6 +3,8 @@
 #include "AnimatedSprite.h"
 #include "Globals.h"
 #include "Slope.h"
+#include "Door.h"
+#include "Level.h"
 
 class Grapics;
 
@@ -29,6 +31,14 @@ public:
 	/// Stops moving the player
 	void stopMoving();
 
+	void lookUp();
+
+	void stopLookingUp();
+
+	void lookDown();
+
+	void stopLookingDown();
+
 	/// Starts jumping
 	void jump();
 
@@ -41,8 +51,19 @@ public:
 
 	void handleSlopeCollision(std::vector<Slope> &others);
 
+	void handleDoorCollision(std::vector<Door> &others, Level &level, Graphics &gfx);
+
+	const inline int getMaxHealth() const { return _maxHealth; }
+
+	const inline int getCurrentHealth() const { return _currentHealth; }
+
 private:
 	float _dx, _dy;
 	Direction _facing;
 	bool _grounded;
+	bool _lookingUp;
+	bool _lookingDown;
+
+	int _maxHealth;
+	int _currentHealth;
 };

@@ -37,6 +37,22 @@ void Sprite::draw(Graphics &graphics, int xPos, int yPos) {
 	graphics.blitSurface(spriteSheet, &srcRect, &dstRect);
 }
 
+void Sprite::setSourceRectX(int value) {
+	srcRect.x = value;
+}
+
+void Sprite::setSourceRectY(int value) {
+	srcRect.y = value;
+}
+
+void Sprite::setSourceRectWidth(int value) {
+	srcRect.w = value;
+}
+
+void Sprite::setSourceRectHeight(int value) {
+	srcRect.h = value;
+}
+
 const Rectangle Sprite::getBoundingBox() const {
 	return _boundingBox;
 }

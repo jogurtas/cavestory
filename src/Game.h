@@ -2,8 +2,8 @@
 
 #include "Player.h"
 #include "Level.h"
-
-class Graphics;
+#include "Hud.h"
+#include "Graphics.h"
 
 /// This class holds all information for main game loop
 class Game {
@@ -15,6 +15,8 @@ public:
 private:
     Player player;
 	Level level;
+	Hud hud;
+	Graphics _gfx;
 
     void gameLoop();
 
